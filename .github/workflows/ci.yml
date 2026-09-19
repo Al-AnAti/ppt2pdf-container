@@ -1,0 +1,14 @@
+name: Pipeline
+on: 
+    push:
+        branches: ["main"]
+    pull_request:
+        branches: ["main"]
+
+jobs:
+    build-and-test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - run: docker build -t ppt2pdf-test .
+            - run: docker run --rm ppt2pdf-test --help
