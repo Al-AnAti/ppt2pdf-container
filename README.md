@@ -1,6 +1,6 @@
 # ppt2pdf-container
 
-![CI Pipeline](https://github.com/Al-AnAti/ppt2pdf-container/actions/workflows/pipeline.yml/badge.svg)
+[![Pipeline](https://github.com/Al-AnAti/ppt2pdf-container/actions/workflows/ci.yml/badge.svg)](https://github.com/Al-AnAti/ppt2pdf-container/actions/workflows/ci.yml)
 
 A Dockerized PowerPoint-to-PDF converter using Python and LibreOffice.
 
