@@ -8,7 +8,7 @@ def convert_file(file_path):
     try:
         print(f"converting: {file_path.name}...")
         subprocess.run(
-            ['soffice', '--headline', '--convert-to', 'pdf', '--outdir', str(outdir), str(file_path)],
+            ['soffice', '--headless', '--convert-to', 'pdf', '--outdir', str(outdir), str(file_path)],
             check=True
         )
         print(f"success: {file_path.name}.pdf")
@@ -18,7 +18,7 @@ def convert_file(file_path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("file", help="The PPT file to convert", required=True)
+    parser.add_argument("file", help="The PPT file to convert")
     target_path = Path(parser.parse_args().file)
 
     if not target_path.exists():
