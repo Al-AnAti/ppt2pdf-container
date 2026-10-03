@@ -40,36 +40,25 @@ This means the host machine only needs Docker, and the same environment can be u
 
 ## Usage
 
-### 1. Pull the image
+To avoid typing out long absolute paths every time, you can drop a `docker-compose.yml` file into the folder where your presentations live:
 
-The latest image is available on Docker Hub:
+~~~yaml
+services:
+  converter:
+    image: nooralanati/ppt2pdf-container:latest
+    volumes:
+      - .:/data
+    working_dir: /data
+~~~
 
-```bash
-docker pull nooralanati/ppt2pdf-container:latest
-```
+Once that file is in your folder, open your terminal in that folder and run:
 
-### 2. Convert a presentation
+**For a single file:**
+~~~bash
+docker compose run --rm converter presentation.pptx
+~~~
 
-Docker containers have their own filesystem, so the directory containing your presentations needs to be mounted into the container.
-
-For example, if your presentation is located in:
-
-```text
-C:\Users\Name\Documents\Presentations
-```
-
-run:
-
-```bash
-docker run --rm -v "C:\Users\Name\Documents\Presentations:/data" nooralanati/ppt2pdf-container:latest /data/presentation.pptx
-```
-
-The resulting PDF will be created next to the original presentation.
-
-### 3. Batch conversion
-
-To convert all supported PowerPoint files in a directory:
-
-```bash
-docker run --rm -v "C:\Users\Name\Documents\Presentations:/data" nooralanati/ppt2pdf-container:latest /data
-```
+**For batch conversion (all files in the folder):**
+~~~bash
+docker compose run --rm converter .
+~~~

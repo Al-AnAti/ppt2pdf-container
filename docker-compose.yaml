@@ -1,0 +1,6 @@
+services:
+  converter:
+    image: nooralanati/ppt2pdf-container:latest
+    volumes:
+      - .:/data
+    working_dir: /data
