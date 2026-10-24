@@ -1,0 +1,4 @@
+-r requirements.txt
+pytest>=8
+pypdf>=4
+python-pptx>=1.0

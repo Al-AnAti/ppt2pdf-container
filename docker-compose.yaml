@@ -1,6 +1,7 @@
 services:
   converter:
     image: nooralanati/ppt2pdf-container:latest
+    init: true          # reap LibreOffice helper processes, forward Ctrl-C
     volumes:
       - .:/data
     working_dir: /data

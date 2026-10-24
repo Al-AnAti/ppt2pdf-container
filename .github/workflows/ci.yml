@@ -1,14 +1,31 @@
 name: Pipeline
-on: 
+on:
     push:
         branches: ["main"]
     pull_request:
         branches: ["main"]
 
 jobs:
+    unit-tests:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-python@v5
+              with:
+                python-version: "3.11"
+            - run: pip install -r requirements-dev.txt
+            - run: pytest tests/test_flatten.py tests/test_cli.py
+
     build-and-test:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
+            - uses: actions/setup-python@v5
+              with:
+                python-version: "3.11"
+            - run: pip install -r requirements-dev.txt
             - run: docker build -t ppt2pdf-test .
             - run: docker run --rm ppt2pdf-test --help
+            - run: pytest tests/test_e2e.py
+              env:
+                PPT2PDF_IMAGE: ppt2pdf-test
